@@ -54,6 +54,6 @@ function findPath(start, end) {
   return null;
 }
 
-let start = new Node([3, 3]);
-let end = new Node([4, 3]);
+let start = new Node([1, 1]);
+let end = new Node([1, 8]);
 console.log(findPath(start, end));
