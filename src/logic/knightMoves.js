@@ -1,4 +1,4 @@
-class Node {
+export class Node {
   constructor(position) {
     this.position = position;
   }
@@ -34,7 +34,7 @@ class Node {
   }
 }
 
-function findPath(start, end) {
+export function findPath(start, end) {
   let queue = [{ node: start, path: [] }];
   while (queue.length > 0) {
     const currentNode = queue[0].node;
@@ -47,13 +47,14 @@ function findPath(start, end) {
       currentNode.position[0] === end.position[0] &&
       currentNode.position[1] === end.position[1]
     ) {
-      console.log("Path found!");
+      currentPath.push([currentNode.position[0], currentNode.position[1]]);
+      // console.log("Path found!");
       return currentPath;
     }
   }
   return null;
 }
 
-let start = new Node([1, 1]);
-let end = new Node([1, 8]);
-console.log(findPath(start, end));
+// let start = new Node([1, 1]);
+// let end = new Node([3, 6]);
+// console.log(findPath(start, end));
