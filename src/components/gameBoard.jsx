@@ -22,9 +22,7 @@ export default function GameBoard() {
       const [i, j] = e.target.id.split(",");
       let start = currentState.start;
       let end = new Node([parseInt(i), parseInt(j)]);
-    //   console.log(start, end);
       const path = findPath(start, end);
-    //   console.log(path);
       setState({
         val: 0,
         start: 0,
@@ -34,46 +32,44 @@ export default function GameBoard() {
     }
   };
 
+  const makeHighlightedCell = (i, j, k, handleClick) => {
+    return (
+      <div key={`${i}, ${j}`} id={`${i}, ${j}`} onClick={handleClick} className="highlighted-cell">
+        {k}
+      </div>
+    );
+  };
+
+  const makeCell = (i, j, handleClick) => {
+    return (
+      <div key={`${i}, ${j}`} id={`${i}, ${j}`} onClick={handleClick} className="grid-cell"></div>
+    );
+  };
 
   const highlightPath = (board) => {
     if (currentState.prevPath !== -1) {
       for (let i = 1; i <= 8; i++) {
         for (let j = 1; j <= 8; j++) {
           let cellFound = 0;
-          for (let k=0;  k<currentState.prevPath.length; k++) {
-            if (currentState.prevPath[k][0]=== i && currentState.prevPath[k][1] === j) {
-              board.push(
-                <div
-                  id={`${i}, ${j}`}
-                  onClick={handleClick}
-                  className="highlighted-cell"
-                >{k}</div>
-              );
+          for (let k = 0; k < currentState.prevPath.length; k++) {
+            if (
+              currentState.prevPath[k][0] === i &&
+              currentState.prevPath[k][1] === j
+            ) {
+              board.push(makeHighlightedCell(i, j, k, handleClick));
               cellFound = 1;
               break;
             }
           }
           if (cellFound === 0) {
-            board.push(
-              <div
-                id={`${i}, ${j}`}
-                onClick={handleClick}
-                className="grid-cell"
-              ></div>
-            );
+            board.push(makeCell(i, j, handleClick));
           }
         }
       }
     } else {
       for (let i = 1; i <= 8; i++) {
         for (let j = 1; j <= 8; j++) {
-          board.push(
-            <div
-              id={`${i}, ${j}`}
-              onClick={handleClick}
-              className="grid-cell"
-            ></div>
-          );
+          board.push(makeCell(i, j, handleClick));
         }
       }
     }
