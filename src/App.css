@@ -1,0 +1,159 @@
+:root {
+  --general-background: #e2e8f0;
+  --btn-background: #404040;
+  --btn-hover: #f1f5f9;
+  --border-color: black;
+  --highlighter: #fde047;
+  --cell-background: white;
+}
+
+* {
+  /* border: 2px solid red; */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  background-color: var(--general-background);
+  padding-top: 0;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 0.5em;
+  padding-bottom: 1em;
+}
+
+header {
+  width: 100%;
+  font-size: 3em;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.side-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  font-size: 1.5em;
+}
+
+.reset-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2em 0.4em;
+  border-radius: 8px;
+  background-color: var(--btn-background);
+  color: white;
+  font-size: 0.8em;
+  font-weight: 900;
+}
+
+.reset-btn:hover {
+  cursor: pointer;
+  background-color: var(--btn-hover);
+  color: black;
+}
+
+.grid-box {
+  background-color: var(--cell-background);
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  border: 2px solid var(--border-color);
+}
+
+.grid-cell,
+.grid-cell-initial,
+.grid-cell-final,
+.highlighted-cell {
+  place-self: center;
+  width: 10vh;
+  height: 10vh;
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-cell:hover {
+  cursor: pointer;
+  background-color: var(--btn-hover);
+}
+
+.grid-cell-initial img,
+.grid-cell-final img {
+  width: 8vh;
+  height: 8vh;
+}
+
+.highlighted-cell {
+  background-color: var(--highlighter);
+  animation: blink 1s ease infinite;
+}
+
+@keyframes blink {
+  0% {
+    background-color: white;
+  }
+  50% {
+    background-color: var(--highlighter);
+  }
+  100% {
+    background-color: white;
+  }
+}
+
+@media (max-width: 650px) {
+  header {
+    font-size: 32px;
+  }
+  .side-content,
+  .reset-btn {
+    font-size: 22px;
+  }
+  .grid-cell,
+  .grid-cell-initial,
+  .grid-cell-final,
+  .highlighted-cell {
+    width: 10vw;
+    height: 10vw;
+  }
+  .grid-cell-initial img,
+  .grid-cell-final img {
+    width: 8vw;
+    height: 8vw;
+  }
+}
+
+@media (max-width: 520px) {
+  header {
+    font-size: 24px;
+  }
+  .side-content,
+  .reset-btn {
+    font-size: 18px;
+  }
+  .side-content{
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 340px) {
+  .side-content,
+  .reset-btn {
+    font-size: 15px;
+  }
+}
