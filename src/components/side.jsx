@@ -1,4 +1,4 @@
-export default function Side({ handleState }) {
+export default function Side({ state, handleState }) {
   const handleClick = () => {
     handleState({
       val: 0,
@@ -8,15 +8,29 @@ export default function Side({ handleState }) {
     });
   };
 
-  return (
-    <div className="side">
-      <header>Knights Travails</header>
-      <div className="side-content">
-        Select the Knight's initial position and the final position
+  if (state.val === 0) {
+    return (
+      <div className="side">
+        <header>Knights Travails</header>
+        <div className="side-content">
+          Assign the Initial position of the Knight
+          <button className="reset-btn" onClick={handleClick}>
+            Reset
+          </button>
+        </div>
       </div>
-      <button className="reset-btn" onClick={handleClick}>
-        Reset
-      </button>
-    </div>
-  );
+    );
+  } else if (state.val === 1) {
+    return (
+      <div className="side">
+        <header>Knights Travails</header>
+        <div className="side-content">
+          Assign the Final position of the Knight
+          <button className="reset-btn" onClick={handleClick}>
+            Reset
+          </button>
+        </div>
+      </div>
+    );
+  }
 }

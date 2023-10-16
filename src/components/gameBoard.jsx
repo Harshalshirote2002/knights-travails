@@ -1,4 +1,6 @@
 import { Node, findPath } from "../logic/knightMoves";
+import knight from '../images/knight1.png';
+import final from '../images/green.png';
 
 export default function GameBoard({ state, handleState }) {
   const board = [];
@@ -56,7 +58,7 @@ export default function GameBoard({ state, handleState }) {
         id={`${i}, ${j}`}
         onClick={handleClick}
         className="grid-cell-initial"
-      ></div>
+      ><img src={knight} alt="knight"/></div>
     );
   };
 
@@ -67,7 +69,7 @@ export default function GameBoard({ state, handleState }) {
         id={`${i}, ${j}`}
         onClick={handleClick}
         className="grid-cell-final"
-      ></div>
+      ><img src={final} alt="goal"/></div>
     );
   };
 

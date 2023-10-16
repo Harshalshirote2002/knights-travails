@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-      <Side handleState={setState} />
+      <Side state={currentState} handleState={setState} />
       <GameBoard state={currentState} handleState={setState} />
     </>
   );
