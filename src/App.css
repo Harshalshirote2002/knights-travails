@@ -1,28 +1,108 @@
-*{
+* {
   /* border: 2px solid red; */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#root{
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  width: 100%;
+  height: 100vh;
+  background-color: #e2e8f0;
+}
+
+.side {
+  width: 100%;
+  /* height: 70vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 4em;
+  padding: 1em;
+}
+
+header {
+  font-size: 4em;
+  font-weight: 900;
+}
+
+.side-content {
+  font-size: 2em;
+}
+
+.reset-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  height: 2em;
+  width: 4em;
+  border-radius: 8px;
+  background-color: #404040;
+  color: white;
+  font-weight: 900;
 }
 
-.grid-box{
+.reset-btn:hover {
+  cursor: pointer;
+  background-color: #f1f5f9;
+  color: black;
+}
+
+.grid-box {
+  background-color: white;
   display: grid;
   grid-template-columns: repeat(8, 80px);
+  border: 2px solid black;
 }
 
-.grid-cell{
+.grid-cell {
   width: 80px;
   height: 80px;
   border: 2px solid black;
 }
 
-.highlighted-cell{
+.grid-cell:hover {
+  cursor: pointer;
+  background-color: #f1f5f9;
+}
+
+.grid-cell-initial {
   width: 80px;
   height: 80px;
   border: 2px solid black;
-  background-color: yellow;
+  background-image: url(./images/knight2.png);
+  background-size: contain;
+}
+
+.grid-cell-final {
+  width: 80px;
+  height: 80px;
+  border: 2px solid black;
+  background-image: url(./images/green.png);
+  background-size: contain;
+}
+
+.highlighted-cell {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #1e293b;
+  background-color: #fde047;
+  animation: blink 1s ease infinite;
+}
+
+@keyframes blink {
+  0%{
+    background-color: white;
+  }
+  50%{
+    background-color: #fde047;
+  }
+  100%{
+    background-color: white;
+  }
 }

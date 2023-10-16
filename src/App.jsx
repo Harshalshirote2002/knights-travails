@@ -1,10 +1,21 @@
+import { useState } from "react";
 import "./App.css";
 import GameBoard from "./components/gameBoard";
+import Side from "./components/side";
 
 function App() {
+  const [currentState, setState] = useState({
+    val: 0,
+    start: 0,
+    end: 0,
+    prevPath: -1,
+  });
 
   return (
-    <GameBoard/>
+    <>
+      <Side handleState={setState} />
+      <GameBoard state={currentState} handleState={setState} />
+    </>
   );
 }
 

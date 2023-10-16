@@ -40,8 +40,8 @@ export function findPath(start, end) {
     const currentNode = queue[0].node;
     const currentPath = queue[0].path;
     queue.shift();
-    for(const child of currentNode.addChildren()){
-        queue.push({node: child, path:[...currentPath, currentNode.position]});
+    for (const child of currentNode.addChildren()) {
+      queue.push({ node: child, path: [...currentPath, currentNode.position] });
     }
     if (
       currentNode.position[0] === end.position[0] &&

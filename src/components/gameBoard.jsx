@@ -1,29 +1,22 @@
-import { useState } from "react";
 import { Node, findPath } from "../logic/knightMoves";
 
-export default function GameBoard() {
-  const [currentState, setState] = useState({
-    val: 0,
-    start: 0,
-    end: 0,
-    prevPath: -1,
-  });
+export default function GameBoard({ state, handleState }) {
   const board = [];
 
   const handleClick = (e) => {
-    if (currentState.val === 0) {
+    if (state.val === 0) {
       const [i, j] = e.target.id.split(",");
-      setState((state) => ({
+      handleState((state) => ({
         ...state,
         val: 1,
         start: new Node([parseInt(i), parseInt(j)]),
       }));
-    } else if (currentState.val === 1) {
+    } else if (state.val === 1) {
       const [i, j] = e.target.id.split(",");
-      let start = currentState.start;
+      let start = state.start;
       let end = new Node([parseInt(i), parseInt(j)]);
       const path = findPath(start, end);
-      setState({
+      handleState({
         val: 0,
         start: 0,
         end: 0,
@@ -34,7 +27,12 @@ export default function GameBoard() {
 
   const makeHighlightedCell = (i, j, k, handleClick) => {
     return (
-      <div key={`${i}, ${j}`} id={`${i}, ${j}`} onClick={handleClick} className="highlighted-cell">
+      <div
+        key={`${i}, ${j}`}
+        id={`${i}, ${j}`}
+        onClick={handleClick}
+        className="highlighted-cell"
+      >
         {k}
       </div>
     );
@@ -42,21 +40,51 @@ export default function GameBoard() {
 
   const makeCell = (i, j, handleClick) => {
     return (
-      <div key={`${i}, ${j}`} id={`${i}, ${j}`} onClick={handleClick} className="grid-cell"></div>
+      <div
+        key={`${i}, ${j}`}
+        id={`${i}, ${j}`}
+        onClick={handleClick}
+        className="grid-cell"
+      ></div>
+    );
+  };
+
+  const makeInitialCell = (i, j, handleClick) => {
+    return (
+      <div
+        key={`${i}, ${j}`}
+        id={`${i}, ${j}`}
+        onClick={handleClick}
+        className="grid-cell-initial"
+      ></div>
+    );
+  };
+
+  const makeFinalCell = (i, j, handleClick) => {
+    return (
+      <div
+        key={`${i}, ${j}`}
+        id={`${i}, ${j}`}
+        onClick={handleClick}
+        className="grid-cell-final"
+      ></div>
     );
   };
 
   const highlightPath = (board) => {
-    if (currentState.prevPath !== -1) {
+    if (state.prevPath !== -1) {
       for (let i = 1; i <= 8; i++) {
         for (let j = 1; j <= 8; j++) {
           let cellFound = 0;
-          for (let k = 0; k < currentState.prevPath.length; k++) {
-            if (
-              currentState.prevPath[k][0] === i &&
-              currentState.prevPath[k][1] === j
-            ) {
-              board.push(makeHighlightedCell(i, j, k, handleClick));
+          for (let k = 0; k < state.prevPath.length; k++) {
+            if (state.prevPath[k][0] === i && state.prevPath[k][1] === j) {
+              if (k === 0) {
+                board.push(makeInitialCell(i, j, handleClick));
+              } else if (k === state.prevPath.length - 1) {
+                board.push(makeFinalCell(i, j, k, handleClick));
+              } else {
+                board.push(makeHighlightedCell(i, j, k, handleClick));
+              }
               cellFound = 1;
               break;
             }
@@ -69,7 +97,15 @@ export default function GameBoard() {
     } else {
       for (let i = 1; i <= 8; i++) {
         for (let j = 1; j <= 8; j++) {
-          board.push(makeCell(i, j, handleClick));
+          if (
+            state.start !== 0 &&
+            state.start.position[0] === i &&
+            state.start.position[1] === j
+          ) {
+            board.push(makeInitialCell(i, j, handleClick));
+          } else {
+            board.push(makeCell(i, j, handleClick));
+          }
         }
       }
     }
